@@ -7,10 +7,10 @@ This service exposes a simple REST API for creating, reading, updating, and dele
 - Install dependencies:
   pip install -r requirements.txt
 
-- Start server:
+- Start server on port 3001:
   uvicorn src.api.main:app --host 0.0.0.0 --port 3001 --reload
 
-- Open API docs:
+- Open the interactive API docs (Swagger UI):
   http://localhost:3001/docs
 
 ## Regenerate OpenAPI spec
@@ -27,7 +27,7 @@ The file will be written to:
 notes_backend/interfaces/openapi.json
 
 Backward compatibility:
-- A deprecated shim exists at `src/api/generate_openapi.py` which simply delegates to `export_openapi`. Prefer using `src.api.export_openapi`.
+- A deprecated shim may exist at `src/api/generate_openapi.py` which simply delegates to `export_openapi`. Prefer using `src.api.export_openapi`.
 
 ## Endpoints (prefixed with /api)
 
