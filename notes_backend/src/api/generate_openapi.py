@@ -1,15 +1,16 @@
-import json
-import os
+"""
+Deprecated shim: use src.api.export_openapi instead.
 
-from src.api.main import app
+This module exists for backward compatibility only. It delegates to the
+exporter in src.api.export_openapi so that legacy commands like:
 
-# Get the OpenAPI schema
-openapi_schema = app.openapi()
+  python -m src.api.generate_openapi
 
-# Write to file
-output_dir = "interfaces"
-os.makedirs(output_dir, exist_ok=True)
-output_path = os.path.join(output_dir, "openapi.json")
+continue to work. Preferred usage:
 
-with open(output_path, "w") as f:
-    json.dump(openapi_schema, f, indent=2)
+  python -m src.api.export_openapi
+"""
+from .export_openapi import _main as _delegate_main
+
+if __name__ == "__main__":
+    raise SystemExit(_delegate_main())

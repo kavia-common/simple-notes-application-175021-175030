@@ -17,7 +17,7 @@ This service exposes a simple REST API for creating, reading, updating, and dele
 
 To export the current OpenAPI spec used by this backend into interfaces/openapi.json, run the single export script:
 
-- Using module:
+- Using module (canonical):
   python -m src.api.export_openapi
 
 - Or if PYTHONPATH isn't set, run from the notes_backend directory:
@@ -25,6 +25,9 @@ To export the current OpenAPI spec used by this backend into interfaces/openapi.
 
 The file will be written to:
 notes_backend/interfaces/openapi.json
+
+Backward compatibility:
+- A deprecated shim exists at `src/api/generate_openapi.py` which simply delegates to `export_openapi`. Prefer using `src.api.export_openapi`.
 
 ## Endpoints (prefixed with /api)
 
