@@ -15,7 +15,7 @@ This service exposes a simple REST API for creating, reading, updating, and dele
 
 ## Regenerate OpenAPI spec
 
-To export the current OpenAPI spec used by this backend into interfaces/openapi.json, run:
+To export the current OpenAPI spec used by this backend into interfaces/openapi.json, run the single export script:
 
 - Using module:
   python -m src.api.export_openapi

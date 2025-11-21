@@ -7,6 +7,8 @@ this to keep interface contracts in sync with the code.
 
 Usage:
   python -m src.api.export_openapi
+  # Or if PYTHONPATH isn't set, from the notes_backend directory:
+  PYTHONPATH=./ python -m src.api.export_openapi
 
 Environment:
   - No environment variables are required. The script writes to a relative
@@ -41,13 +43,27 @@ def _resolve_interfaces_path() -> Path:
 
 # PUBLIC_INTERFACE
 def generate_openapi_dict() -> Dict[str, Any]:
-    """Generate the OpenAPI spec dictionary from the FastAPI app."""
+    """
+    Generate and return the OpenAPI spec dictionary from the FastAPI app.
+
+    Returns:
+        Dict[str, Any]: The OpenAPI schema as a Python dictionary.
+    """
     return app.openapi()
 
 
 # PUBLIC_INTERFACE
 def export_openapi_to_file(out_path: Path | None = None) -> Path:
-    """Export the OpenAPI spec to a JSON file and return the output path."""
+    """
+    Export the OpenAPI spec to a JSON file.
+
+    Args:
+        out_path (Path | None): Optional explicit output path. If not provided,
+            it defaults to interfaces/openapi.json under the container root.
+
+    Returns:
+        Path: The path where the OpenAPI file was written.
+    """
     if out_path is None:
         out_path = _resolve_interfaces_path()
 
@@ -61,7 +77,12 @@ def export_openapi_to_file(out_path: Path | None = None) -> Path:
 
 
 def _main() -> int:
-    """CLI entrypoint for exporting the OpenAPI file."""
+    """
+    CLI entrypoint for exporting the OpenAPI file.
+
+    Loads the FastAPI application from src.api.main:app and writes the resulting
+    OpenAPI specification to notes_backend/interfaces/openapi.json.
+    """
     out_path = export_openapi_to_file()
     print(f"OpenAPI spec exported to: {out_path}")
     return os.EX_OK
