@@ -1,16 +1,17 @@
 """
-Deprecated shim: use src.api.export_openapi instead.
+Deprecated shim: delegates to src.api.export_openapi for exporting the OpenAPI schema.
 
-This module exists for backward compatibility only. It delegates to the
-exporter in src.api.export_openapi so that legacy commands like:
-
-  python -m src.api.generate_openapi
-
-continue to work. Preferred usage:
-
+Prefer running:
   python -m src.api.export_openapi
 """
-from .export_openapi import _main as _delegate_main
+
+# PUBLIC_INTERFACE
+def main() -> int:
+    """Deprecated entrypoint that delegates to export_openapi._main()."""
+    # Deferred import to avoid any circular import issues at module import time.
+    from .export_openapi import _main as _export_main
+    return _export_main()
+
 
 if __name__ == "__main__":
-    raise SystemExit(_delegate_main())
+    raise SystemExit(main())
