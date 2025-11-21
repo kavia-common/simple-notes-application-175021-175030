@@ -13,6 +13,19 @@ This service exposes a simple REST API for creating, reading, updating, and dele
 - Open API docs:
   http://localhost:3001/docs
 
+## Regenerate OpenAPI spec
+
+To export the current OpenAPI spec used by this backend into interfaces/openapi.json, run:
+
+- Using module:
+  python -m src.api.export_openapi
+
+- Or if PYTHONPATH isn't set, run from the notes_backend directory:
+  PYTHONPATH=./ python -m src.api.export_openapi
+
+The file will be written to:
+notes_backend/interfaces/openapi.json
+
 ## Endpoints (prefixed with /api)
 
 - POST /api/notes (201): Create a note
